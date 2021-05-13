@@ -12,4 +12,7 @@ import com.group3.DonationManagementSystem.model.User;
 public interface UserService extends UserDetailsService{
 	User save(UserRegistrationDto registrationDto);
 	List<User> getAllUsers();
+	void delete(Long id);
+	User get(Long id);
+	void saveEditedUser(User u);
 }

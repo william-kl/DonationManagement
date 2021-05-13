@@ -33,7 +33,7 @@ public class User {
 
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // eager: whenever retrieve user, retrieve roles
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) // eager: whenever retrieve user, retrieve roles
 	@JoinTable(
 			name = "users_roles", 
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
@@ -51,7 +51,15 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 	}
+	
 
+	public User(String firstName, String lastName, String email, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -98,6 +106,14 @@ public class User {
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public void addRole(Role role) {
+		this.roles.add(role);
+	}
+	
+	public void removeRole(Role role) {
+		this.roles.remove(role);
 	}
 
 }
