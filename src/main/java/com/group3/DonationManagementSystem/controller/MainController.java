@@ -4,13 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.group3.DonationManagementSystem.service.UserServiceImpl;
+import com.group3.DonationManagementSystem.dto.UserRegistrationDto;
+import com.group3.DonationManagementSystem.model.User;
+import com.group3.DonationManagementSystem.service.UserService;
 
 @Controller
 public class MainController {
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userService;
+	
 	
 	@GetMapping("/login")
 	public String login() {
@@ -25,7 +32,44 @@ public class MainController {
 	
 	@GetMapping("/displayList")//get the list of all the users
 	public String listUsers(Model model) {
-		model.addAttribute("listUsers", userServiceImpl.getAllUsers());
+		//List<Role> listRoles = roleService.getAllRoles();
+		//model.addAttribute("listRoles", listRoles);
+		model.addAttribute("listUsers", userService.getAllUsers());
 		return "user";
 	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteUser(@PathVariable(name="id") Long id) {
+		userService.delete(id);
+		return "redirect:/displayList";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public ModelAndView showEditUserPage(@PathVariable(name="id") Long id) {
+		ModelAndView mav = new ModelAndView("edit_user");//edit_user is a thymeleaf page
+		User user_ = userService.get(id);//fetch user from repo
+		mav.addObject("user", user_);//thymeleaf use key "user" to get user_
+		return mav;
+	}
+	
+	
+	@PostMapping("/save")
+	public String saveEditedUser(@ModelAttribute("user") User u) {//fetch "user" from thymleaf, put it in u
+		userService.saveEditedUser(u);							//use UserRegistrationDto because password encoding
+		return "redirect:/displayList";					//and userRoles will dissapear if we save user
+														//directly
+	}
+	
+	@GetMapping("users/new")
+	public String showCreateNewUserPage(Model model) {
+		model.addAttribute("user", new UserRegistrationDto());
+		return "new_user";
+	}
+	
+	@PostMapping("/save_new_user")  //receive th:action="@{/registration} and post it 
+	public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
+		userService.save(registrationDto);
+		return "redirect:/displayList";
+	}
+	
 }
