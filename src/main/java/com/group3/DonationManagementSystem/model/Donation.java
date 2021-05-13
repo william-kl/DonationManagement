@@ -1,6 +1,8 @@
 package com.group3.DonationManagementSystem.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Donation {
@@ -13,11 +15,11 @@ public class Donation {
 
     private Boolean canRecur;
 
-    @OneToMany(mappedBy = "transaction",
+    @OneToMany(mappedBy = "donation",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             orphanRemoval = true)
-//    private List<TimeClock> timeClockEntries;
+    private List<Transaction> transactionList;
 
     // region GETTERS/SETTERS
     public Long getDonationId() {
@@ -42,6 +44,26 @@ public class Donation {
 
     public void setCanRecur(Boolean canRecur) {
         this.canRecur = canRecur;
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
+    }
+    // endregion
+
+    // region METHODS
+    public void addTransactionEntry(Transaction transaction) {
+        if (transaction != null) {
+            if (transactionList == null) {
+                transactionList = new ArrayList<>();
+            }
+            transaction.setDonation(this);
+            transactionList.add(transaction);
+        }
     }
     // endregion
 
