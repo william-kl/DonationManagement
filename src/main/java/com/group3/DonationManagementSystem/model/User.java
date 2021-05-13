@@ -1,36 +1,21 @@
 package com.group3.DonationManagementSystem.model;
 
-import java.util.Collection;
+import java.util.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email")) // email should be unique
 public class User {
 
+	// region VARIABLES
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "first_name")
 	private String firstName;
-
-	@Column(name = "last_name")
 	private String lastName;
-
 	private String email;
-
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) // eager: whenever retrieve user, retrieve roles
@@ -39,10 +24,18 @@ public class User {
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 			) // manytomany, create 3rd table
-																																																
 	private Collection<Role> roles; // cascade: whenever parent(user) changes, apply to its children(role)
-	
+
+	@OneToMany(mappedBy = "user",
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER,
+			orphanRemoval = true)
+	private Set<Transaction> transactionSet;
+	// endregion
+
+	// region CONSTRUCTOR(S)
 	public User() {}
+
 	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
 		super();
 		this.firstName = firstName;
@@ -50,16 +43,16 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
-	}
+  }
 	
-
-	public User(String firstName, String lastName, String email, String password) {
+  public User(String firstName, String lastName, String email, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -116,4 +109,49 @@ public class User {
 		this.roles.remove(role);
 	}
 
+	public Set<Transaction> getTransactionSet() {
+		return transactionSet;
+	}
+
+	public void setTransactionSet(Set<Transaction> transactionSet) {
+		this.transactionSet = transactionSet;
+	}
+	// endregion
+
+	// region METHODS
+	public void addTransactionEntry(Transaction transaction) {
+		if (transaction != null) {
+			if (transactionSet == null) {
+				transactionSet = new HashSet<>();
+			}
+			transaction.setUser(this);
+			transactionSet.add(transaction);
+		}
+	}
+	// endregion
+
+	@Override
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("User:/n")
+				.append("User Id: ").append(id).append("/n")
+				.append("First Name: ").append(firstName).append("/n")
+				.append("Last Name: ").append(lastName).append("/n")
+				.append("Email: ").append(email).append("/n")
+				.append("Password: ").append(password).append("/n")
+				.append("Roles:/n");
+
+		for (Role role: roles) {
+			sb.append(role).append(" ");
+		}
+
+		sb.append("/nTransaction List:/n");
+
+		for (Transaction transaction : transactionSet) {
+			sb.append(transaction).append("/n");
+		}
+
+		return sb.toString();
+	}
 }
