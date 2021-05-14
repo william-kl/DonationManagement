@@ -6,6 +6,7 @@ import com.group3.DonationManagementSystem.model.User;
 import com.group3.DonationManagementSystem.service.DonationServiceImpl;
 import com.group3.DonationManagementSystem.service.UserServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
