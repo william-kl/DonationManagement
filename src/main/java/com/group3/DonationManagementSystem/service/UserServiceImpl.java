@@ -30,6 +30,30 @@ public class UserServiceImpl implements UserService{
 	public List<User> getAllUsers(){
 		return userRepository.findAll();
 	}
+	
+	
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		userRepository.deleteById(id);
+	}
+	
+	
+	@Override
+	public User get(Long id) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(id).get();
+	}
+	
+	
+	@Override
+	public void saveEditedUser(User user) {
+		// TODO Auto-generated method stub
+		userRepository.save(user);
+	}
+	
+	
+
 	@Override
 	public User save(UserRegistrationDto registrationDto) {
 		User user = new User(registrationDto.getFirstName(),
