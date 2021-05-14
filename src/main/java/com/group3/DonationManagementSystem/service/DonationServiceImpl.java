@@ -27,7 +27,7 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public void addTransactionByDonationId(Long id, Transaction transactionEntry) throws ResourceNotFoundException {
-        Donation donation = null;
+        Donation donation;
         try {
             donation = donationRepository.getOne(id);
             donation.addTransactionEntry(transactionEntry);
@@ -36,5 +36,7 @@ public class DonationServiceImpl implements DonationService {
         }
     }
 
-
+    public List<Transaction> getTransactionsByDonationId(Long id) {
+        return donationRepository.getTransactionsByDonationId(id);
+    }
 }

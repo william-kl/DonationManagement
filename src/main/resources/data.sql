@@ -15,4 +15,5 @@ INSERT INTO donation (donation_id, donation_type, can_recur) VALUES
 INSERT INTO transaction (transaction_id, amount, date, recurring, donation_id, id) VALUES
   (1, 100.00, '2021/05/10', 1, 2, 1),
   (2, 10.00, '2021/05/10', 0, 3, 1),
-  (3, 53.00, '2021/05/12', 0, 4, 2);
+  (3, 53.00, '2021/05/12', 0, 4, 2),
+  (4, 500.00, '2021/05/13', 0, 2, 2);
