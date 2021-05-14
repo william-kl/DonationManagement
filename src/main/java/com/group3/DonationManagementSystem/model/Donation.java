@@ -17,8 +17,7 @@ public class Donation {
 
     @OneToMany(mappedBy = "donation",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true)
+            fetch = FetchType.EAGER)
     private List<Transaction> transactionList;
 
     // region GETTERS/SETTERS

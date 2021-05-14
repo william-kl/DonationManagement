@@ -1,7 +1,9 @@
 package com.group3.DonationManagementSystem.model;
 
 import javax.persistence.*;
+import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Transaction {
@@ -76,12 +78,14 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction:/n" +
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
+
+        return "Transaction:\n" +
                 "Transaction Id: " + transactionId +
-                "/nAmount: " + amount +
-                "/nDate: " + date +
-                "/nRecurring: " + recurring +
-                "/nName: " + user.getFirstName() + " " + user.getLastName() +
-                "/nDonation Type: " + donation.getDonationType();
+                "\nAmount: $" + String.format("%.2f", amount) +
+                "\nDate: " + dateFormatter.format(date) +
+                "\nRecurring: " + recurring +
+                "\nName: " + user.getFirstName() + " " + user.getLastName() +
+                "\nDonation Type: " + donation.getDonationType() + "\n";
     }
 }

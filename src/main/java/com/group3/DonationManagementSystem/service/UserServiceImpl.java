@@ -18,8 +18,6 @@ import com.group3.DonationManagementSystem.model.Role;
 import com.group3.DonationManagementSystem.model.User;
 import com.group3.DonationManagementSystem.repository.UserRepository;
 
-
-
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
@@ -27,9 +25,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
-	
-	
+
 	@Override
 	public List<User> getAllUsers(){
 		return userRepository.findAll();
@@ -60,7 +56,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User save(UserRegistrationDto registrationDto) {
-		// TODO Auto-generated method stub
 		User user = new User(registrationDto.getFirstName(),
 							 registrationDto.getLastName(),
 							 registrationDto.getEmail(),
