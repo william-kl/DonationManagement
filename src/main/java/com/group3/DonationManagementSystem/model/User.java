@@ -1,6 +1,5 @@
 package com.group3.DonationManagementSystem.model;
 
-
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -32,10 +31,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-
 	@NotEmpty(message = "First name can't be empty and it should have at least 2 characters")
 	@Size(min = 2)
-	@Column(name = "first_name")
 	private String firstName;
 
 	@NotEmpty(message = "Last name can't be empty and it should have at least 2 characters")
@@ -47,7 +44,7 @@ public class User {
 	private String email;
 	private Boolean active;
 
-	@NotEmpty(message = "Last name can't be empty and it should have at least 6 characters")
+	@NotEmpty(message = "Password can't be empty and it should have at least 6 characters")
 	@Size(min = 6)
 	private String password;
 
