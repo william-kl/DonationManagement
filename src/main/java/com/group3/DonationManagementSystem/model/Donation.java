@@ -2,7 +2,9 @@ package com.group3.DonationManagementSystem.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Donation {
@@ -12,13 +14,13 @@ public class Donation {
     private Long donationId;
 
     private String donationType;
-
     private Boolean canRecur;
+    private Boolean active;
 
     @OneToMany(mappedBy = "donation",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    private List<Transaction> transactionList;
+    private Set<Transaction> transactionSet;
 
     // region GETTERS/SETTERS
     public Long getDonationId() {
@@ -45,32 +47,41 @@ public class Donation {
         this.canRecur = canRecur;
     }
 
-    public List<Transaction> getTransactionList() {
-        return transactionList;
+    public Set<Transaction> getTransactionSet() {
+        return transactionSet;
     }
 
-    public void setTransactionList(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+    public void setTransactionSet(Set<Transaction> transactionSet) {
+        this.transactionSet = transactionSet;
     }
     // endregion
 
     // region METHODS
     public void addTransactionEntry(Transaction transaction) {
         if (transaction != null) {
-            if (transactionList == null) {
-                transactionList = new ArrayList<>();
+            if (transactionSet == null) {
+                transactionSet = new HashSet<>();
             }
             transaction.setDonation(this);
-            transactionList.add(transaction);
+            transactionSet.add(transaction);
         }
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
     // endregion
 
     @Override
     public String toString() {
-        return "Donation:/n" +
+        return "Donation:\n" +
                 "Donation Id: " + donationId +
-                "/nDonation Type: " + donationType +
-                "/nCan Recur? " + canRecur;
+                "\nDonation Type: " + donationType +
+                "\nCan Recur? " + canRecur +
+                "\nIs Active? " + (active ? "true" : "false") + "\n";
     }
 }

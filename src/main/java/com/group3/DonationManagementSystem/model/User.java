@@ -17,6 +17,7 @@ public class User {
 	private String lastName;
 	private String email;
 	private String password;
+	private Boolean active;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) // eager: whenever retrieve user, retrieve roles
 	@JoinTable(
@@ -43,6 +44,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		active = true;
   }
 	
   public User(String firstName, String lastName, String email, String password) {
@@ -51,6 +53,7 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		active = true;
 	}
 
 	public Long getId() {
@@ -116,6 +119,14 @@ public class User {
 	public void setTransactionSet(Set<Transaction> transactionSet) {
 		this.transactionSet = transactionSet;
 	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 	// endregion
 
 	// region METHODS
@@ -134,23 +145,22 @@ public class User {
 	public String toString() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("User:/n")
-				.append("User Id: ").append(id).append("/n")
-				.append("First Name: ").append(firstName).append("/n")
-				.append("Last Name: ").append(lastName).append("/n")
-				.append("Email: ").append(email).append("/n")
-				.append("Password: ").append(password).append("/n")
-				.append("Roles:/n");
 
+		sb.append("User:\n");
+		sb.append("User Id: ").append(id).append("\n");
+		sb.append("First Name: ").append(firstName).append("\n");
+		sb.append("Last Name: ").append(lastName).append("\n");
+		sb.append("Email: ").append(email).append("\n");
+		sb.append("Password: ").append(password).append("\n");
+		sb.append("Is active: ").append(active ? "True" : "False").append("\n");
+		sb.append("Roles:\n");
 		for (Role role: roles) {
 			sb.append(role).append(" ");
 		}
-
-		sb.append("/nTransaction List:/n");
-
-		for (Transaction transaction : transactionSet) {
-			sb.append(transaction).append("/n");
-		}
+//		sb.append("\nTransaction List:\n");
+//		for (Transaction transaction : transactionSet) {
+//			sb.append(transaction).append("\n");
+//		}
 
 		return sb.toString();
 	}
