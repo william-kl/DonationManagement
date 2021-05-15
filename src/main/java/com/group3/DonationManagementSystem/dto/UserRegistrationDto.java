@@ -1,9 +1,22 @@
 package com.group3.DonationManagementSystem.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UserRegistrationDto {
+	@NotEmpty(message = "First name can't be empty and it should have at least 2 characters")
+	@Size(min = 2)
 	private String firstName;
+	
+	@NotEmpty(message = "Last name can't be empty and it should have at least 2 characters")
+	@Size(min = 2)
 	private String lastName;
+	
+	@NotEmpty(message = "Email address can't be empty and it should contain @")
 	private String email;
+	
+	@NotEmpty(message = "Last name can't be empty and it should have at least 6 characters")
+	@Size(min = 6)
 	private String password;
 	
 	public UserRegistrationDto() {}
