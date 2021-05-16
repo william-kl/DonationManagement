@@ -1,6 +1,5 @@
 package com.group3.DonationManagementSystem.model;
 
-
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -13,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 
 import java.util.*;
 
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email")) // email should be unique
@@ -31,23 +31,22 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	
 	@NotEmpty(message = "First name can't be empty and it should have at least 2 characters")
 	@Size(min = 2)
-	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@NotEmpty(message = "Last name can't be empty and it should have at least 2 characters")
 	@Size(min = 2)
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@NotEmpty(message = "Email address can't be empty and it should contain @")
 	private String email;
-	
-	@NotEmpty(message = "Last name can't be empty and it should have at least 6 characters")
+	private Boolean active;
+
+	@NotEmpty(message = "Password can't be empty and it should have at least 6 characters")
 	@Size(min = 6)
-  private String password;
+	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) // eager: whenever retrieve user, retrieve roles
 	@JoinTable(
@@ -74,6 +73,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		active = true;
   }
 	
   public User(String firstName, String lastName, String email, String password) {
@@ -82,6 +82,7 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		active = true;
 	}
 
 	public Long getId() {
@@ -147,6 +148,14 @@ public class User {
 	public void setTransactionSet(Set<Transaction> transactionSet) {
 		this.transactionSet = transactionSet;
 	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 	// endregion
 
 	// region METHODS
@@ -165,23 +174,22 @@ public class User {
 	public String toString() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("User:/n")
-				.append("User Id: ").append(id).append("/n")
-				.append("First Name: ").append(firstName).append("/n")
-				.append("Last Name: ").append(lastName).append("/n")
-				.append("Email: ").append(email).append("/n")
-				.append("Password: ").append(password).append("/n")
-				.append("Roles:/n");
 
+		sb.append("User:\n");
+		sb.append("User Id: ").append(id).append("\n");
+		sb.append("First Name: ").append(firstName).append("\n");
+		sb.append("Last Name: ").append(lastName).append("\n");
+		sb.append("Email: ").append(email).append("\n");
+		sb.append("Password: ").append(password).append("\n");
+		sb.append("Is active: ").append(active ? "True" : "False").append("\n");
+		sb.append("Roles:\n");
 		for (Role role: roles) {
 			sb.append(role).append(" ");
 		}
-
-		sb.append("/nTransaction List:/n");
-
-		for (Transaction transaction : transactionSet) {
-			sb.append(transaction).append("/n");
-		}
+//		sb.append("\nTransaction List:\n");
+//		for (Transaction transaction : transactionSet) {
+//			sb.append(transaction).append("\n");
+//		}
 
 		return sb.toString();
 	}

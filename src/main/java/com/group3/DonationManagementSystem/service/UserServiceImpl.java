@@ -30,29 +30,30 @@ public class UserServiceImpl implements UserService{
 	public List<User> getAllUsers(){
 		return userRepository.findAll();
 	}
-	
+
+	@Override
+	public List<User> getAllActiveUsers() {
+		return userRepository.getAllActiveUsers();
+	}
 	
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		userRepository.deleteById(id);
+		User user = userRepository.getOne(id);
+		user.setActive(false);
+		userRepository.save(user);
 	}
-	
-	
+
 	@Override
 	public User get(Long id) {
 		// TODO Auto-generated method stub
 		return userRepository.findById(id).get();
 	}
-	
-	
+
 	@Override
 	public void saveEditedUser(User user) {
 		// TODO Auto-generated method stub
 		userRepository.save(user);
 	}
-	
-	
 
 	@Override
 	public User save(UserRegistrationDto registrationDto) {

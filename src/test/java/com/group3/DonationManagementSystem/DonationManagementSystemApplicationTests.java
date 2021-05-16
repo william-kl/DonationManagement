@@ -20,15 +20,53 @@ class DonationManagementSystemApplicationTests {
 	@Autowired
 	UserServiceImpl userService;
 
-	// region DONATION CLASS TESTS
+	// region DONATION TESTS
 	@Test
 	void testGetAllDonations() {
 		List<Donation> donationList = donationService.getAllDonations();
 		System.out.println("=== TEST getAllDonations ===");
+		System.out.println("Should return 5 records");
+		System.out.println(donationList);
+		System.out.println(" ");
+	}
+
+	@Test
+	void testGetAllActiveDonations() {
+		List<Donation> donationList = donationService.getAllActiveDonations();
+		System.out.println("=== TEST getAllActiveDonations ===");
 		System.out.println("Should return 4 records");
 		System.out.println(donationList);
 		System.out.println(" ");
 	}
+
+	@Test
+	public void testDeleteDonationById() {
+		System.out.println("=== TEST deleteDonationById ===");
+		System.out.println("Deleting record 2: Run for the Sun 2021");
+		donationService.deleteDonationById(2L);
+		System.out.println(donationService.getAllActiveDonations());
+		System.out.println(" ");
+	}
+	// endregion
+
+	//region TRANSACTION TESTS
+	@Test
+	void testGetAllTransactions() {
+		List<Transaction> transactionList = donationService.getAllTransactions();
+		System.out.println("=== TEST getAllTransactions ===");
+		System.out.println("Should return 6 records");
+		System.out.println(transactionList);
+		System.out.println(" ");
+	}
+
+//	@Test
+//	void testGetAllTransactionsForActiveDonations() {
+//		List<Transaction> transactionList = donationService.getAllTransactionsForActiveDonations();
+//		System.out.println("=== TEST getAllTransactionsForActiveDonations ===");
+//		System.out.println("Should return 5 records");
+//		System.out.println(transactionList);
+//		System.out.println(" ");
+//	}
 
 	@Test
 	void testGetTransactionsByDonationId() {
@@ -41,15 +79,24 @@ class DonationManagementSystemApplicationTests {
 	}
 	// endregion
 
-
+	// region USER TESTS
 	@Test
 	void testGetAllUsers() {
 		List<User> userList = userService.getAllUsers();
 		System.out.println("=== TEST getAllUsers ===");
-		System.out.println("Should return 2 records");
+		System.out.println("Should return 4 records");
 		System.out.println(userList);
 		System.out.println(" ");
 	}
 
+	@Test
+	void testGetAllActiveUsers() {
+		List<User> userList = userService.getAllActiveUsers();
+		System.out.println("=== TEST getAllActiveUsers ===");
+		System.out.println("Should return 3 records");
+		System.out.println(userList);
+		System.out.println(" ");
+	}
+	// endregion
 
 }
