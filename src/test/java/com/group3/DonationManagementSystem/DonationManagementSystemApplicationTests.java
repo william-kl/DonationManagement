@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -95,20 +96,6 @@ class DonationManagementSystemApplicationTests {
 		System.out.println(userList);
 		System.out.println(" ");
 	}
-
-//	@Test
-//	void testSaveEditedUser() {
-//		User user = new User();
-//		System.out.println("=== TEST saveEditedUser ===");
-//		user.setFirstName("will");
-//		user.setLastName("cai");
-//		user.setEmail("hc740@");
-//		user.setPassword("123456");
-//		user.setRoles(Collections.singletonList(new Role("ADMIN")));
-//		userService.saveEditedUser(user);
-//		System.out.println(user);
-//		System.out.println(" ");
-//	}
 	// endregion
 
 	// region CART TESTS
