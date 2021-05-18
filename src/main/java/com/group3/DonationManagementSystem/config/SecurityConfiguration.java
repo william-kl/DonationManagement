@@ -46,6 +46,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeRequests()
+			.antMatchers("/delete/**").hasAuthority("ADMIN")//only auth for ADMIN user
+			.antMatchers("/edit/**").hasAuthority("ADMIN")
+			.antMatchers("/users/**").hasAuthority("ADMIN")
 			.antMatchers(
 						"/registration**",
 						"/js",
@@ -63,7 +66,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 						.clearAuthentication(true)
 						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 						.logoutSuccessUrl("/login?logout")
-			.permitAll();
+			.permitAll()
+			.and()
+			.exceptionHandling().accessDeniedPage("/403errorpage");
 	}
 	
 }

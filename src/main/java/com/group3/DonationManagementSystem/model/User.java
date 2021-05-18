@@ -1,6 +1,8 @@
 package com.group3.DonationManagementSystem.model;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,10 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-import java.util.*;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email")) // email should be unique
@@ -58,13 +56,15 @@ public class User {
 
 	@OneToMany(mappedBy = "user",
 			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER,
-			orphanRemoval = true)
+			fetch = FetchType.EAGER
+			)//orphanRemoval = true
 	private Set<Transaction> transactionSet;
 	// endregion
 
 	// region CONSTRUCTOR(S)
-	public User() {}
+	public User() {
+		this.active = true;
+	}
 
 	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
 		super();

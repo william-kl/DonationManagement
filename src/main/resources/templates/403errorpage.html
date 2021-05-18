@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Registration and Login App</title>
+<title>Access Denied</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
@@ -40,38 +40,12 @@
 			Welcome <span sec:authentication="principal.username">User</span>
 			
 		</p>
-		
-		<div align="center">
-			<h1>User Management</h1>
-			<table class="table table-bordered">
-				<thead class="thead-dark">
-					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Email</th>
-						<th>Role</th>
-						<h3><a th:href="@{/users/new}">Create New User</a></h3>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="user: ${listUsers}">
-						<td th:text="${user.firstName}"></td>
-						<td th:text="${user.lastName}"></td>
-						<td th:text="${user.email}"></td>
-						<td th:text="${user.roles}"></td>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
-						<td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
-					</tr>
-					
-				</tbody>
-				
-			</table>
-		</div>
-		
-		
-	</div>
-	
-	
+		<h2>Sorry, you don't have permission to do the operations.</h2>
+		<a href="/" th:href="@{/displayList}">Back</a>
+	</div>	
+
+</body>
+</html>
+
 </body>
 </html>
