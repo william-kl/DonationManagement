@@ -2,6 +2,7 @@ package com.group3.DonationManagementSystem;
 
 import com.group3.DonationManagementSystem.model.Cart;
 import com.group3.DonationManagementSystem.model.Donation;
+import com.group3.DonationManagementSystem.model.Role;
 import com.group3.DonationManagementSystem.model.Transaction;
 import com.group3.DonationManagementSystem.model.User;
 import com.group3.DonationManagementSystem.service.CartServiceImpl;
@@ -125,6 +126,29 @@ class DonationManagementSystemApplicationTests {
 
 		cartService.addCartItemForUser(cartItem);
 	}
+
+	@Test
+	void testAddAdmin() {
+		User user = new User();
+		user.setEmail("hc740@");
+		user.setFirstName("william");
+		user.setLastName("cai");
+		user.setPassword("$2a$10$iiLXJrnXfVkK6kk8wpsyA.gRJQ7nY7Esf.I1DgJFORmxES72r9ILi");
+		user.setRoles(Arrays.asList(new Role("ADMIN")));
+		userService.saveEditedUser(user);
+	}
+
+	@Test
+	void testAddUser() {
+		User user = new User();
+		user.setEmail("michelle@");
+		user.setFirstName("mich");
+		user.setLastName("ding");
+		user.setPassword("$2a$10$iiLXJrnXfVkK6kk8wpsyA.gRJQ7nY7Esf.I1DgJFORmxES72r9ILi");
+		user.setRoles(Arrays.asList(new Role("USER")));
+		userService.saveEditedUser(user);
+	}
+
 	// endregion
 
 }

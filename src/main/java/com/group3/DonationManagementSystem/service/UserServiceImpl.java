@@ -39,8 +39,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void delete(Long id) {
 		User user = userRepository.getOne(id);
-		user.setActive(false);
-		userRepository.save(user);
+		//user.setActive(false);
+		//userRepository.save(user);
+		userRepository.delete(user);
 	}
 
 	@Override
@@ -52,6 +53,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void saveEditedUser(User user) {
 		// TODO Auto-generated method stub
+//		User newUser = user;
+//		newUser.setRoles = user.getRoles();
+		userRepository.save(user);
+	}
+	
+	@Override
+	public void save(User user) {
 		userRepository.save(user);
 	}
 
@@ -61,7 +69,11 @@ public class UserServiceImpl implements UserService{
 							 registrationDto.getLastName(),
 							 registrationDto.getEmail(),
 							 passwordEncoder.encode(registrationDto.getPassword()),
-							 Arrays.asList(new Role("ROLE_USER")));//a collection of roles newRole, newRole...
+							 Arrays.asList(new Role("USER")));
+////		if (user.getRoles() == null) {
+//			user.setRoles(Arrays.asList(new Role("USER")));
+//		}
+							
 		return userRepository.save(user);
 	}
 
