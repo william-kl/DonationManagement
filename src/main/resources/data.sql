@@ -22,3 +22,7 @@ INSERT INTO transaction (transaction_id, amount, date, recurring, donation_id, i
   (4, 53.00, '2021/05/12', 0, 4, 2),
   (5, 500.00, '2021/05/13', 0, 2, 2),
   (6, 75.32, '2021/05/14', 0, 1, 3);
+
+INSERT INTO cart (id, donation_id, amount, date, recurring) VALUES
+  (1, 2, 55.00, '2021/05/17', 0),
+  (1, 4, 35.00, '2021/05/17', 1);

@@ -27,6 +27,11 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
+    public Donation getDonationById(Long id) {
+        return donationRepository.getOne(id);
+    }
+
+    @Override
     public void addDonation(Donation donation) {
         donationRepository.save(donation);
     }

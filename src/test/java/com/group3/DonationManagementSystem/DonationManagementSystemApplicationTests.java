@@ -1,14 +1,17 @@
 package com.group3.DonationManagementSystem;
 
+import com.group3.DonationManagementSystem.model.Cart;
 import com.group3.DonationManagementSystem.model.Donation;
 import com.group3.DonationManagementSystem.model.Transaction;
 import com.group3.DonationManagementSystem.model.User;
+import com.group3.DonationManagementSystem.service.CartServiceImpl;
 import com.group3.DonationManagementSystem.service.DonationServiceImpl;
 import com.group3.DonationManagementSystem.service.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
@@ -19,6 +22,9 @@ class DonationManagementSystemApplicationTests {
 
 	@Autowired
 	UserServiceImpl userService;
+
+	@Autowired
+	CartServiceImpl cartService;
 
 	// region DONATION TESTS
 	@Test
@@ -102,6 +108,23 @@ class DonationManagementSystemApplicationTests {
 //		System.out.println(user);
 //		System.out.println(" ");
 //	}
+	// endregion
+
+	// region CART TESTS
+	@Test
+	void testAddCartItemForUser() {
+		User user = userService.get(1L);
+		Donation donation1 = donationService.getDonationById(1L);
+
+		Cart cartItem = new Cart();
+		cartItem.setDonation(donation1);
+		cartItem.setUser(user);
+		cartItem.setAmount(145.00);
+		cartItem.setRecurring(true);
+		cartItem.setDate(LocalDate.now());
+
+		cartService.addCartItemForUser(cartItem);
+	}
 	// endregion
 
 }
