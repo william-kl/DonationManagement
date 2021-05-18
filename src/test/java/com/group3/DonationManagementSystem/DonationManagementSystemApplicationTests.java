@@ -1,18 +1,20 @@
 package com.group3.DonationManagementSystem;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
+import com.group3.DonationManagementSystem.model.Cart;
 import com.group3.DonationManagementSystem.model.Donation;
 import com.group3.DonationManagementSystem.model.Role;
 import com.group3.DonationManagementSystem.model.Transaction;
 import com.group3.DonationManagementSystem.model.User;
+import com.group3.DonationManagementSystem.service.CartServiceImpl;
 import com.group3.DonationManagementSystem.service.DonationServiceImpl;
 import com.group3.DonationManagementSystem.service.UserServiceImpl;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 class DonationManagementSystemApplicationTests {
@@ -22,6 +24,9 @@ class DonationManagementSystemApplicationTests {
 
 	@Autowired
 	UserServiceImpl userService;
+
+	@Autowired
+	CartServiceImpl cartService;
 
 	// region DONATION TESTS
 	@Test
@@ -62,15 +67,6 @@ class DonationManagementSystemApplicationTests {
 		System.out.println(" ");
 	}
 
-//	@Test
-//	void testGetAllTransactionsForActiveDonations() {
-//		List<Transaction> transactionList = donationService.getAllTransactionsForActiveDonations();
-//		System.out.println("=== TEST getAllTransactionsForActiveDonations ===");
-//		System.out.println("Should return 5 records");
-//		System.out.println(transactionList);
-//		System.out.println(" ");
-//	}
-
 	@Test
 	void testGetTransactionsByDonationId() {
 		List<Transaction> transactions = donationService.getTransactionsByDonationId(2L);
@@ -100,7 +96,24 @@ class DonationManagementSystemApplicationTests {
 		System.out.println(userList);
 		System.out.println(" ");
 	}
-	
+	// endregion
+
+	// region CART TESTS
+	@Test
+	void testAddCartItemForUser() {
+		User user = userService.get(1L);
+		Donation donation1 = donationService.getDonationById(1L);
+
+		Cart cartItem = new Cart();
+		cartItem.setDonation(donation1);
+		cartItem.setUser(user);
+		cartItem.setAmount(145.00);
+		cartItem.setRecurring(true);
+		cartItem.setDate(LocalDate.now());
+
+		cartService.addCartItemForUser(cartItem);
+	}
+
 	@Test
 	void testAddAdmin() {
 		User user = new User();
@@ -111,7 +124,7 @@ class DonationManagementSystemApplicationTests {
 		user.setRoles(Arrays.asList(new Role("ADMIN")));
 		userService.saveEditedUser(user);
 	}
-	
+
 	@Test
 	void testAddUser() {
 		User user = new User();
@@ -122,9 +135,7 @@ class DonationManagementSystemApplicationTests {
 		user.setRoles(Arrays.asList(new Role("USER")));
 		userService.saveEditedUser(user);
 	}
-	
+
 	// endregion
-	
-	
 
 }

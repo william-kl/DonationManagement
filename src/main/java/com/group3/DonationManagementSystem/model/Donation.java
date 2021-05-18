@@ -1,9 +1,7 @@
 package com.group3.DonationManagementSystem.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,6 +19,17 @@ public class Donation {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private Set<Transaction> transactionSet;
+
+    // region CONSTRUCTOR(S)
+    public Donation() {}
+
+    public Donation(String donationType, Boolean canRecur, Set<Transaction> transactionSet) {
+        super();
+        this.donationType = donationType;
+        this.canRecur = canRecur;
+        this.transactionSet = transactionSet;
+    }
+    // endregion
 
     // region GETTERS/SETTERS
     public Long getDonationId() {
@@ -48,6 +57,9 @@ public class Donation {
     }
 
     public Set<Transaction> getTransactionSet() {
+        if (transactionSet == null) {
+            transactionSet = new HashSet<>();
+        }
         return transactionSet;
     }
 
