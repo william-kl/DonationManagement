@@ -5,8 +5,8 @@ INSERT INTO user (id, first_name, last_name, email, password, active) VALUES
   (4, 'Julia', 'Richardson', 'julia@company.org', '1234', 1);
 
 INSERT INTO role (id, name) VALUES
-  (1, 'ROLE_USER'),
-  (2, 'ROLE_ADMIN');
+  (1, 'USER'),
+  (2, 'ADMIN');
 
 INSERT INTO donation (donation_id, donation_type, can_recur, active) VALUES
   (1, 'General Donation Fund', 1, 1),
