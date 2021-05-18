@@ -1,12 +1,12 @@
 INSERT INTO user (id, first_name, last_name, email, password, active) VALUES
-  (1, 'John', 'Doe', 'john@company.org', '1234', 1),
-  (2, 'Jane', 'Poe', 'jane@notcompany.com', '1234', 1),
-  (3, 'Sam', 'Smith', 'sam@notcompany.com', '1234', 0),
-  (4, 'Julia', 'Richardson', 'julia@company.org', '1234', 1);
+  (1, 'John', 'Doe', 'john@company.org', '$2a$10$557zIih3GhHGEM9S9aft8eqLHKsqVnwLA73JavP6zDs1l2dgcQt86', 1),
+  (2, 'Jane', 'Poe', 'jane@notcompany.com', '$2a$10$557zIih3GhHGEM9S9aft8eqLHKsqVnwLA73JavP6zDs1l2dgcQt86', 1),
+  (3, 'Sam', 'Smith', 'sam@notcompany.com', '$2a$10$557zIih3GhHGEM9S9aft8eqLHKsqVnwLA73JavP6zDs1l2dgcQt86', 0),
+  (4, 'Julia', 'Richardson', 'julia@company.org', '$2a$10$557zIih3GhHGEM9S9aft8eqLHKsqVnwLA73JavP6zDs1l2dgcQt86', 1);
 
 INSERT INTO role (id, name) VALUES
-  (1, 'ROLE_USER'),
-  (2, 'ROLE_ADMIN');
+  (1, 'USER'),
+  (2, 'ADMIN');
 
 INSERT INTO donation (donation_id, donation_type, can_recur, active) VALUES
   (1, 'General Donation Fund', 1, 1),

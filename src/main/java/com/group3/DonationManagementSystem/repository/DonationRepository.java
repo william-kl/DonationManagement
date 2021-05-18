@@ -19,7 +19,4 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 
     @Query("FROM Transaction WHERE donation_id = ?1")
     List<Transaction> getTransactionsByDonationId(Long empId);
-
-//    @Query("FROM Transaction WHERE active = 1")
-//    List<Transaction> getAllTransactionsForActiveDonations();
 }

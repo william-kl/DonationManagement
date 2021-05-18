@@ -1,7 +1,6 @@
 package com.group3.DonationManagementSystem.model;
 
 import javax.persistence.*;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,6 +23,19 @@ public class Transaction {
     @ManyToOne  // allow bi-directional mapping so we can access Donation from Transaction
     @JoinColumn(name = "donation_id", nullable = false)
     private Donation donation;
+    // endregion
+
+    // region CONSTRUCTOR(S)
+    public Transaction() {};
+
+    public Transaction(double amount, String date, boolean recurring, User user, Donation donation) {
+        super();
+        this.amount = amount;
+        this.date = LocalDate.parse(date);
+        this.recurring = recurring;
+        this.user = user;
+        this.donation = donation;
+    }
     // endregion
 
     // region GETTERS/SETTERS

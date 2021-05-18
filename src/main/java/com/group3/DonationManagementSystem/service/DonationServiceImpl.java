@@ -36,11 +36,6 @@ public class DonationServiceImpl implements DonationService {
         return donationRepository.getAllTransactions();
     }
 
-//    @Override
-//    public List<Transaction> getAllTransactionsForActiveDonations() {
-//        return donationRepository.getAllTransactionsForActiveDonations();
-//    }
-
     @Override
     public void addTransactionByDonationId(Long id, Transaction transactionEntry) throws ResourceNotFoundException {
         Donation donation;

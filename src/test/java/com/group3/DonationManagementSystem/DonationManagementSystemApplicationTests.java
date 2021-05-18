@@ -59,15 +59,6 @@ class DonationManagementSystemApplicationTests {
 		System.out.println(" ");
 	}
 
-//	@Test
-//	void testGetAllTransactionsForActiveDonations() {
-//		List<Transaction> transactionList = donationService.getAllTransactionsForActiveDonations();
-//		System.out.println("=== TEST getAllTransactionsForActiveDonations ===");
-//		System.out.println("Should return 5 records");
-//		System.out.println(transactionList);
-//		System.out.println(" ");
-//	}
-
 	@Test
 	void testGetTransactionsByDonationId() {
 		List<Transaction> transactions = donationService.getTransactionsByDonationId(2L);
@@ -97,6 +88,20 @@ class DonationManagementSystemApplicationTests {
 		System.out.println(userList);
 		System.out.println(" ");
 	}
+
+//	@Test
+//	void testSaveEditedUser() {
+//		User user = new User();
+//		System.out.println("=== TEST saveEditedUser ===");
+//		user.setFirstName("will");
+//		user.setLastName("cai");
+//		user.setEmail("hc740@");
+//		user.setPassword("123456");
+//		user.setRoles(Collections.singletonList(new Role("ADMIN")));
+//		userService.saveEditedUser(user);
+//		System.out.println(user);
+//		System.out.println(" ");
+//	}
 	// endregion
 
 }

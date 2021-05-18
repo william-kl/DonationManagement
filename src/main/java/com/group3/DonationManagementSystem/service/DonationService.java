@@ -14,5 +14,4 @@ public interface DonationService {
 
     void addTransactionByDonationId(Long id, Transaction transactionEntry) throws ResourceNotFoundException;
     List<Transaction> getAllTransactions();
-//    List<Transaction> getAllTransactionsForActiveDonations();
 }

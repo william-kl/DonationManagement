@@ -64,7 +64,9 @@ public class User {
 	// endregion
 
 	// region CONSTRUCTOR(S)
-	public User() {}
+	public User() {
+		this.active = true;
+	}
 
 	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
 		super();
