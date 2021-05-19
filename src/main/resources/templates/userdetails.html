@@ -3,7 +3,7 @@
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Donation Management</title>
+	<title>Personal Information</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
@@ -23,7 +23,7 @@
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Donation Management System</a>
 			</div>
-			
+
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
@@ -38,49 +38,17 @@
 		<p>
 			Welcome <span sec:authentication="principal.username">User</span>
 		</p>
-		
+
 		<div align="center">
 
-			<h1>Donate</h1>
-			<th:block th:each="donation : ${donations}">
-				<div class="mt-1">
-					<a th:href="@{/makedonation/{donationId}(donationId=${donation.donationId})}">
-						<button class="btn btn-secondary">[[${donation.donationType}]]</button>
-					</a>
-				</div>
-			</th:block>
+			<h1 align="left">Personal Information</h1>
 
-<!--				<table class="table table-borderless">-->
-<!--					<thead>-->
-<!--						<tr>-->
-<!--							<th></th>-->
-<!--							<th></th>-->
-<!--							<th>Check for Monthly Recurring Gift</th>-->
-<!--						</tr>-->
-<!--					</thead>-->
-<!--					<tbody>-->
-<!--						<tr th:each="donation : ${donations}"}>-->
-<!--							<td>-->
-<!--								<label th:text="${donation.donationType}"></label>-->
-<!--							</td>-->
-<!--							<td>-->
-<!--								<input type="text" th:value="*{amount}">-->
-<!--							</td>-->
-<!--							<td>-->
-<!--								<span th:if="${donation.canRecur}">-->
-<!--									<input type="checkbox" th:value="*{recurring}">-->
-<!--								</span>-->
-<!--								<span th:unless="${donation.canRecur}">-->
-<!--									&nbsp;-->
-<!--								</span>-->
-<!--							</td>-->
-<!--						</tr>-->
-<!--					</tbody>-->
-<!--				</table>-->
-<!--				<button type="submit" class="btn btn-primary"> Save </button>-->
+			<form th:action="@{/personalInfo}" method="post" class="form">
+			</form>
+
 		</div>
-		
-		
+
+
 	</div>
 	
 	
