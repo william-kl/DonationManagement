@@ -13,8 +13,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.group3.DonationManagementSystem.service.UserService;
 
-
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{

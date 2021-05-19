@@ -8,6 +8,7 @@ import com.group3.DonationManagementSystem.model.User;
 import java.util.List;
 
 public interface CartService {
-    List<Cart> getCartItemsForUser();
+    List<Cart> getCartItems();
     void addCartItemForUser(Cart cartItem);
+
 }

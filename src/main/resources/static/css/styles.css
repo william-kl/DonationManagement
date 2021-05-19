@@ -1,0 +1,102 @@
+[role="main"] {
+  padding-top: 48px; /* Space for fixed navbar */
+}
+
+a, a:hover, a:focus {
+	color: inherit;
+	text-decoration: none;
+	transition: all 0.3s;
+
+.navbar {
+	background: #000; /* Navbar background color */
+	color: #fff; /* Header text color */
+	transition: all 0.3s;
+}
+
+.navbar-brand {
+	padding-top: .75rem;
+	padding-bottom: .75rem;
+	font-size: 1rem;
+}
+
+.navbar-toggler {
+	padding: 0.25rem 0.75rem;
+	font-size: 1.125rem;
+	line-height: 1;
+	border: 1px solid transparent;
+	border-radius: 2rem;
+}
+
+.navbar.dropdown-toggle::after {
+	display: none;
+}
+
+.navbar.dropdown-menu {
+	left: auto;
+	top: 101%;
+	right: 0;
+	border: none;
+}
+
+.navbar .form-control {
+	padding: .75rem 1rem;
+	border-width: 0;
+	border-radius: 0;
+}
+
+#nav-button {
+	background: #dd3333;
+}
+
+#wrapper {
+    padding-top: 48px; /* Space for fixed navbar */
+    display: flex;
+    align-items: stretch;
+}
+
+
+.sidebar {
+	position: fixed;
+	top: 48px;
+	bottom: 0;
+	left: 0;
+	font-size: 1.25em;
+	z-index: 100; /* Display behind the top navbar */
+	padding: 48px 0 0; /* Adjust for height of the navbar */
+	box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+	color: #fff;
+	background: #000;
+}
+
+#sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+#sidebar-sticky .nav-link {
+	font-weight: 500;
+	color: #fff;
+}
+
+#sidebar-sticky i {
+	margin-right: 4px;
+}
+
+#sidebar-sticky .nav-link.active {
+	color: #fff;
+	background: #336600;
+}
+
+#sidebar-sticky .nav-link:hover {
+  	color: gray; /* Changes the font color on hover */
+	background: #4d9900; /* Changes the background color on hover */
+}
+
+#sidebar-sticky .sidebar-heading {
+	font-size: .75rem;
+	text-transform: uppercase;
+}
